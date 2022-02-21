@@ -1,0 +1,377 @@
+﻿<pu:WindowX x:Class="SerialPortWPF.MainWindow"
+            xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+            xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+            xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+            xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+            xmlns:pu="clr-namespace:Panuon.UI.Silver;assembly=Panuon.UI.Silver"
+            mc:Ignorable="d"
+            Height="630"
+            Width="920"
+            WindowStartupLocation="CenterScreen"
+       
+            BorderBrush="#0099FF" Closing="WindowX_Closing" >
+    <pu:WindowXCaption.Header>
+        <TextBlock FontSize="14" VerticalAlignment="Center" Margin="8,10">串口调试助手</TextBlock>
+    </pu:WindowXCaption.Header>
+    <Window.Resources>
+        <Style TargetType="TextBlock">
+            <Setter Property="FontFamily" Value="pack://application:,,,/WpfApp1;component/iconfont.ttf"/>
+            <Setter Property="FontSize" Value="25"/>
+        </Style>
+    </Window.Resources>
+    <Grid  Name="grid" >
+        <TabControl
+                Width="{Binding ElementName=grid, Path=ActualWidth}"
+               
+                HorizontalAlignment="Center"
+                pu:TabControlHelper.ItemHeight="50"        
+                pu:TabControlHelper.HeaderPanelBackground="#e6e6e6"
+                pu:TabControlHelper.SelectedForeground="Blue"                 
+            >
+            <TabItem Header="SerialPort/串口">
+                <Grid  Width="{Binding ElementName=grid, Path=ActualWidth}"  Margin="0,0,0,0" >
+
+                    <Grid Background="#f2f2f2" Width="300" HorizontalAlignment="Left">
+                        <StackPanel    Margin="0,0">
+                            <Grid Height="32" Margin="0,8,0,0">
+                                <Grid.ColumnDefinitions >
+                                    <ColumnDefinition Width="4*">
+                                    </ColumnDefinition>
+                                    <ColumnDefinition Width="2*">
+                                    </ColumnDefinition>
+                                    <ColumnDefinition Width="6*">
+                                    </ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+                                <Label Grid.Column="0" Margin="10,0" VerticalAlignment="Center" >串口号 :</Label>
+                                <Button
+                                Name="SearchCOM"
+                                Margin="20,4,0,0"
+                                Grid.Column="1"
+                                Content="查找"
+                                Foreground="#31ADFF"
+
+                      
+
+                                pu:ButtonHelper.ButtonStyle="Link"
+                                pu:ButtonHelper.CornerRadius="0" Grid.ColumnSpan="2" HorizontalAlignment="Left" Width="40" Height="25" VerticalAlignment="Top" Click="SearchCOM_Click"/>
+                                <ComboBox
+                                Name="SerialPortCom"
+                                Height="28"
+                                Width="120"
+                                 Padding="8,0"
+                                Grid.Column="2"
+                                SelectedIndex="0"
+                                BorderBrush="#919191"
+                                BorderThickness="2"
+                                Background="#f7f7f7"
+                                 pu:ComboBoxHelper.ItemHeight="30" />
+                            </Grid>
+                            <Grid Height="32" >
+                                <Grid.ColumnDefinitions >
+                                    <ColumnDefinition Width="100*">
+                                    </ColumnDefinition>
+                                    <ColumnDefinition Width="50*">
+                                    </ColumnDefinition>
+                                    <ColumnDefinition Width="93*">
+                                    </ColumnDefinition>
+                                    <ColumnDefinition Width="57*"/>
+                                </Grid.ColumnDefinitions>
+                                <Label Grid.Column="0"  Margin="10,0,10,0" VerticalAlignment="Center">波特率 :</Label>
+
+                                <ComboBox 
+                                x:Name="SerialPortBaudRate"
+                                Height="28"
+                                Width="120"
+                                Grid.Column="2"
+                                BorderBrush="#919191"
+                                BorderThickness="2"
+                                Background="#f7f7f7"
+                                Padding="8,0"
+                                SelectedIndex="5"
+                                 pu:ComboBoxHelper.HoverBackground="#a6d8ff"
+                                 pu:ComboBoxHelper.ItemHeight="30" Grid.ColumnSpan="2" Margin="15,2,15,2">
+                                    <ComboBoxItem  Margin="2" Content="300" />
+                                    <ComboBoxItem  Margin="2" Content="600" />
+                                    <ComboBoxItem  Margin="2" Content="1200" />
+                                    <ComboBoxItem  Margin="2" Content="2400" />
+                                    <ComboBoxItem  Margin="2" Content="4800" />
+                                    <ComboBoxItem  Margin="2" Content="9600" />
+                                    <ComboBoxItem  Margin="2" Content="19200" />
+                                    <ComboBoxItem  Margin="2" Content="38400" />
+                                    <ComboBoxItem  Margin="2" Content="43000" />
+                                    <ComboBoxItem  Margin="2" Content="56000" />
+                                    <ComboBoxItem  Margin="2" Content="57600" />
+                                    <ComboBoxItem  Margin="2" Content="115200" />
+                                </ComboBox>
+                            </Grid>
+                            <Grid Height="32" >
+                                <Grid.ColumnDefinitions >
+                                    <ColumnDefinition Width="4*">
+                                    </ColumnDefinition>
+                                    <ColumnDefinition Width="2*">
+                                    </ColumnDefinition>
+                                    <ColumnDefinition Width="6*">
+                                    </ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+                                <Label Grid.Column="0" Margin="10,0" VerticalAlignment="Center">数据位 :</Label>
+                                <ComboBox 
+                                x:Name="SerialPortDataBits"
+                                Height="28"
+                                Width="120"
+                                Grid.Column="2"
+                                BorderBrush="#919191"
+                                BorderThickness="2"
+                                Background="#f7f7f7"
+                                Padding="8,0"
+                                SelectedIndex="3"
+                                 pu:ComboBoxHelper.HoverBackground="#a6d8ff"
+                                 pu:ComboBoxHelper.ItemHeight="30">
+                                    <ComboBoxItem  Margin="2" Content="5" />
+                                    <ComboBoxItem  Margin="2" Content="6" />
+                                    <ComboBoxItem  Margin="2" Content="7" />
+                                    <ComboBoxItem  Margin="2" Content="8" />
+                                </ComboBox>
+                            </Grid>
+                            <Grid Height="32" >
+                                <Grid.ColumnDefinitions >
+                                    <ColumnDefinition Width="4*">
+                                    </ColumnDefinition>
+                                    <ColumnDefinition Width="2*">
+                                    </ColumnDefinition>
+                                    <ColumnDefinition Width="6*">
+                                    </ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+                                <Label Grid.Column="0" Margin="10,0" VerticalAlignment="Center">校验位 :</Label>
+                                <ComboBox 
+                                x:Name="SerialPortParity"
+                                Height="28"
+                                Width="120"
+                                Grid.Column="2"
+                                BorderBrush="#919191"
+                                BorderThickness="2"
+                                Background="#f7f7f7"
+                                Padding="8,0"
+                                SelectedIndex="2"
+                                 pu:ComboBoxHelper.HoverBackground="#a6d8ff"
+                                 pu:ComboBoxHelper.ItemHeight="30">
+                                    <ComboBoxItem  Margin="2" Content="Even" />
+                                    <ComboBoxItem  Margin="2" Content="Mark" />
+                                    <ComboBoxItem  Margin="2" Content="None" />
+                                    <ComboBoxItem  Margin="2" Content="Odd" />
+                                </ComboBox>
+                            </Grid>
+                            <Grid Height="32" >
+                                <Grid.ColumnDefinitions >
+                                    <ColumnDefinition Width="50*">
+                                    </ColumnDefinition>
+                                    <ColumnDefinition Width="25*">
+                                    </ColumnDefinition>
+                                    <ColumnDefinition Width="27*">
+                                    </ColumnDefinition>
+                                    <ColumnDefinition Width="48*"/>
+                                </Grid.ColumnDefinitions>
+                                <Label Grid.Column="0" Margin="10,0,10,0" VerticalAlignment="Center">停止位 :</Label>
+                                <ComboBox 
+                                x:Name="SerialPortStopBits"
+                                Height="28"
+                                Width="120"
+                                Grid.Column="2"
+                                BorderBrush="#919191"
+                                BorderThickness="2"
+                                Background="#f7f7f7"
+                                Padding="8,0"
+                                SelectedIndex="0"
+                                 pu:ComboBoxHelper.HoverBackground="#a6d8ff"
+                                 pu:ComboBoxHelper.ItemHeight="30" Grid.ColumnSpan="2" Margin="15,2,15,2">
+                 
+                                    <ComboBoxItem  Margin="2" Content="One" />
+                                    <ComboBoxItem  Margin="2" Content="OnePointFive" />
+                                    <ComboBoxItem  Margin="2" Content="Two" />
+                                </ComboBox>
+                            </Grid>
+                            <Grid Height="38" >
+                                <Button x:Name="SerialPortOpen" Background="#c2c2c2" Margin="16,4"  pu:ButtonHelper.HoverBrush="#999999" Click="SerialPortOpen_Click">
+
+                                    <TextBlock x:Name="SerialPortOpen_txt" FontSize="14" Foreground="#272727" HorizontalAlignment="Center" Height="14"  >打开串口</TextBlock>
+                                </Button>
+                            </Grid>
+                            <Separator  Margin="16,4"/>
+                            <Grid Height="36" >
+                                <Label FontSize="16" Margin="10,0" VerticalAlignment="Center">接收区设置</Label>
+                            </Grid>
+
+
+                            <DockPanel Height="32" >
+                                <CheckBox x:Name="Receive_Hex"
+                                Height="30"
+                                Margin="18,0"
+                                pu:CheckBoxHelper.CheckBoxStyle="Standard" Checked="Receive_Hex_Checked" Unchecked="Receive_Hex_UnChecked"/>
+                                <Label Margin="-14,0" FontSize="16"  VerticalAlignment="Center">十六进制显示</Label>
+                            </DockPanel>
+                            <DockPanel Height="32" >
+                                <CheckBox x:Name="Receive_Stop"
+                                Height="30"
+                                Margin="18,0"
+                                pu:CheckBoxHelper.CheckBoxStyle="Standard"
+                                Checked="Receive_Stop_Checked"
+                                Unchecked="Receive_Stop_UnChecked"
+                                          />
+                                <Label Margin="-14,0" FontSize="16"  VerticalAlignment="Center">暂停接收显示</Label>
+                            </DockPanel>
+                            <DockPanel  Height="36" >
+
+                                <Button x:Name="Save_DataRecord"   pu:ButtonHelper.ButtonStyle="Link"  HorizontalAlignment="Center" Margin="40,0" Click="Save_DataRecord_Click">
+                                    <TextBlock FontSize="14" Foreground="Blue" TextDecorations="Underline" VerticalAlignment="Center" >保存数据</TextBlock>
+                                </Button>
+                                <Button x:Name="Clear_DataRecord"  Width="70" pu:ButtonHelper.ButtonStyle="Link" pu:ButtonHelper.HoverBrush="#e3e3e3" Click="Clear_DataRecord_Click">
+                                    <TextBlock  FontSize="14" Foreground="Blue"  TextDecorations="Underline"  VerticalAlignment="Center"  >清空数据</TextBlock>
+                                </Button>
+                            </DockPanel>
+                            <Separator  Margin="16,2"/>
+                            <Grid Height="36" >
+                                <Label FontSize="16" Margin="10,0" VerticalAlignment="Center">发送区设置</Label>
+                            </Grid>
+
+                            <DockPanel Height="32" >
+                                <CheckBox x:Name="SendHex"
+                                Height="30"
+                                Margin="18,0"
+                                pu:CheckBoxHelper.CheckBoxStyle="Standard"
+                                Checked="SendHex_Checked"
+                                Unchecked="SendHex_UnChecked"
+                                          />
+                                <Label Margin="-14,0" FontSize="16"  VerticalAlignment="Center">十六进制发送</Label>
+                            </DockPanel>
+                            <DockPanel Height="32" >
+                                <CheckBox x:Name="Send_Timing"
+                                Height="30"
+                                Margin="18,0"
+                                pu:CheckBoxHelper.CheckBoxStyle="Standard" Checked="Send_Timing_Checked" Unchecked="Send_Timing_Unchecked"/>
+                                <Label Margin="-14,0" FontSize="16"  VerticalAlignment="Center">定时发送</Label>
+                                <TextBox
+                                x:Name="SendTiming_Num" 
+                                Width="100" 
+                                Height="28" 
+                                Margin="61,0,0,0"
+                                BorderThickness="2"  
+                                Background="#f7f7f7"
+                                InputMethod.IsInputMethodEnabled="False"
+                                pu:TextBoxHelper.IsClearButtonVisible="True"
+                                BorderBrush="#919191" Cursor="IBeam" PreviewTextInput="SendTiming_Num_PreviewTextInput">
+                                    1
+                                </TextBox>
+                                <Label FontSize="14"  HorizontalContentAlignment="Right" VerticalContentAlignment="Center" Width="25">秒</Label>
+                            </DockPanel>
+                            <DockPanel Height="32" >
+                                <CheckBox 
+                                x:Name="NewLine_CB"
+                                Height="30"
+                                Margin="18,0"
+                                pu:CheckBoxHelper.CheckBoxStyle="Standard" 
+                                Checked="NewLine_CB_Checked"
+                                Unchecked="NewLine_CB_Unchecked"/>
+                                <Label Margin="-14,0" FontSize="16"  VerticalAlignment="Center">换行符</Label>
+                                <ComboBox
+                                x:Name="NewLine"
+                                Width="100"
+                                  Height="28"
+                                Grid.Column="2"
+                                Margin="40,0,0,0"
+                                BorderBrush="#919191"
+                                BorderThickness="2"
+                                Background="#f7f7f7"
+                                Padding="8,0"
+                                SelectedIndex="1"
+                                 pu:ComboBoxHelper.HoverBackground="#a6d8ff"
+                                 pu:ComboBoxHelper.ItemHeight="30">
+                                    <ComboBoxItem  Margin="2" Content="\r\n" />
+                                    <ComboBoxItem  Margin="2" Content="\r" />
+                                    <ComboBoxItem  Margin="2" Content="\n" />
+                                </ComboBox>
+                            </DockPanel>
+                            <DockPanel  Height="36" >
+
+                                <CheckBox
+                                Height="30"
+                                Margin="18,0"
+                                pu:CheckBoxHelper.CheckBoxStyle="Standard"/>
+                                <Label Margin="-14,0" FontSize="16"  VerticalAlignment="Center">发送文件</Label>
+                                <Button   Width="70" pu:ButtonHelper.ButtonStyle="Link" pu:ButtonHelper.HoverBrush="#e3e3e3">
+                                    <TextBlock FontSize="14" Foreground="Blue"  TextDecorations="Underline"  VerticalAlignment="Center"  >拓展命令</TextBlock>
+                                </Button>
+                            </DockPanel>
+                        </StackPanel>
+                    </Grid>
+
+                    <Grid  Name="SPR" Margin="300,0,0,0">
+
+                        <Grid Margin="0,0,0,136" >
+                            <RichTextBox x:Name="Data_Record"  BorderBrush="#919191" BorderThickness="2" Margin="2,0,4,0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Cursor="IBeam" VerticalContentAlignment="Top" Padding="6,16" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" IsReadOnly="True"  >
+
+                                <FlowDocument >
+                                        <Paragraph Name="Paragraph" LineHeight="22" />
+                               
+                                    </FlowDocument>
+                          
+                            </RichTextBox>
+                        </Grid>
+                        <Grid   Height="130"   VerticalAlignment="Bottom">
+                            <Grid Margin="0,0,0,28">
+                                <Grid  Margin="2,0,140,0">
+                                    <TextBox 
+                                        x:Name="Data_Send" 
+                                        BorderBrush="#919191"
+                                        BorderThickness="2" 
+                                        Cursor="IBeam" 
+                                        VerticalContentAlignment="Top"  
+                                        Padding="8,8" 
+                                     
+                                        InputLanguageManager.RestoreInputLanguage="True"
+                                        LostFocus="Data_Send_LostFocus" 
+                                        GotFocus="Data_Send_GotFocus" 
+                                        TextChanged="Data_Send_TextChanged"  
+                                        PreviewTextInput="Data_Send_PreviewTextInput"
+                                        KeyDown="Data_Send_KeyDown"
+                           
+                                        />
+                                </Grid>
+                                <Grid  HorizontalAlignment="Right" Width="130" Margin="0,0,2,0">
+                                    <Button x:Name="Send" Background="#c2c2c2" pu:ButtonHelper.HoverBrush="#919191" Click="Send_Click">
+
+                                        <TextBlock FontSize="20" Foreground="#272727" VerticalAlignment="Center"  >发送</TextBlock>
+                                    </Button>
+                                </Grid>
+                            </Grid>
+                            <Grid   Height="28" VerticalAlignment="Bottom">
+                                <Grid>
+                                    <Grid Margin="2,0" HorizontalAlignment="Left">
+                                        <Label>发送 :0</Label>
+
+                                    </Grid>
+                                    <Grid HorizontalAlignment="Center">
+                                        <Label>接收 :0</Label>
+
+                                    </Grid>
+                                    <Grid HorizontalAlignment="Right">
+                                        <Label>发送 :0</Label>
+                                    </Grid>
+                                </Grid>
+                            </Grid>
+                        </Grid>
+
+                    </Grid>
+                </Grid>
+
+
+            </TabItem>
+            <TabItem Header="NetworkPort/网口">
+                <StackPanel Background="Wheat" Width="{Binding ElementName=grid, Path=ActualWidth}" Margin="0,0,0,0"/>
+            </TabItem>
+            <TabItem Header="Bluetooth/蓝牙" >
+                <StackPanel Background="Firebrick" Width="{Binding ElementName=grid, Path=ActualWidth}" Margin="0,0,0,0"/>
+            </TabItem>
+        </TabControl>
+    </Grid>
+
+</pu:WindowX>
+    
